@@ -13,13 +13,19 @@
 # limitations under the License.
 
 import webapp2
+import glob
+from dominate import document
+from dominate.tags import *
 
+photos = glob.glob('photos/*.jpg')
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('Hows it going!')
 
+with open('index.html', 'w') as f:
+    f.write(doc.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
